@@ -62,6 +62,10 @@ const TodoList: React.FC = () => {
     }
 
     const deleteTodo = async (id: number) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this todo?');
+        if(!confirmDelete){
+            return;
+        }
         try {
             await axios.delete(`http://localhost:3001/api/todos/${id}`);
             setTodos(todos.filter(t => t.id !== id))
